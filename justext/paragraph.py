@@ -15,11 +15,13 @@ class Paragraph(object):
         self.xpath = path.xpath
         self.text_nodes = []
         self.chars_count_in_links = 0
+        self.chars_count_in_bold = 0
         self.tags_count = 0
 
     @property
     def is_heading(self):
-        return bool(re.search(r"\bh\d\b", self.dom_path))
+        # if paragraph contains only bold content regard it as heading.
+        return bool(re.search(r"\bh\d\b", self.dom_path)) or bool(self.bold_density==1)
 
     @property
     def is_boilerplate(self):
@@ -67,3 +69,11 @@ class Paragraph(object):
             return 0
 
         return self.chars_count_in_links / text_length
+
+    @property
+    def bold_density(self):
+        text_length = len(self.text)
+        if text_length == 0:
+            return 0
+        
+        return self.chars_count_in_bold / text_length

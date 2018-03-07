@@ -140,6 +140,7 @@ class ParagraphMaker(ContentHandler):
         self.paragraphs = []
         self.paragraph = None
         self.link = False
+        self.bold = False
         self.br = False
         self._start_new_pragraph()
 
@@ -164,6 +165,8 @@ class ParagraphMaker(ContentHandler):
             self.br = bool(name == "br")
             if name == 'a':
                 self.link = True
+            if name == 'b':
+                self.bold = True
             self.paragraph.tags_count += 1
 
     def endElementNS(self, name, qname):
@@ -174,6 +177,8 @@ class ParagraphMaker(ContentHandler):
             self._start_new_pragraph()
         if name == 'a':
             self.link = False
+        if name == 'b':
+            self.bold = False
 
     def endDocument(self):
         self._start_new_pragraph()
@@ -186,6 +191,8 @@ class ParagraphMaker(ContentHandler):
 
         if self.link:
             self.paragraph.chars_count_in_links += len(text)
+        if self.bold:
+            self.paragraph.chars_count_in_bold += len(text)
         self.br = False
 
 
