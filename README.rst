@@ -11,7 +11,7 @@ jusText
 Notice
 -------
 Please take a glance of the original `repo <https://github.com/miso-belica/jusText>`_ first. This version Based on jusText 2.2.0. change the logic of how to detect heading.
-Besides h1, h2, h3, h4, h5, h6 tages are treated as heading. I assume if the papragraph
+Besides h1, h2, h3, h4, h5, h6 tags are treated as heading. I assume if the papragraph
 contains only bold text, which should also be regarded as heading.
 
 Program jusText is a tool for removing boilerplate content, such as navigation
